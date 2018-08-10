@@ -101,6 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 95682522849885138}
+  startingAnim: Flicker
 --- !u!212 &212573230563752958
 SpriteRenderer:
   m_ObjectHideFlags: 1

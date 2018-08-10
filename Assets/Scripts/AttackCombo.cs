@@ -5,11 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class AttackCombo {
 	public List<ComboKeys> comboKeys;
-	public int damage;
-	public int knockback;
-	public float damageMultiplier = 1f;
-	public float knockbackMultiplier = 1f;
-
+	public GameObject prefab;
+	public int jamCost = 10;
 	public int consecutive = 0;
 
 	public bool HandleKey(ComboKeys key) {

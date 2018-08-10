@@ -4,26 +4,32 @@ using UnityEngine;
 
 public class Player : MusicalGameObject {
 	[Header("References")]
-	public GameObject playerAttackPrefab;
 	// 'bopping' one that gets reset every beat
 	public DynamicCircle innerCircle;
 	// indicates the outer edge of the attack radius
 	public DynamicCircle boundaryCircle;
+	public UnityEngine.UI.Slider jamSlider;
+
 	[Header("Values")]
 	public float speed = 6f;
 	// cooldown before the next key is registered
 	public float keyCooldown = 0.1f;
+	public int maxJam = 60;
+
 	[Header("Data")]
 	public List<AttackCombo> attacks;
-	private Rigidbody2D rb2d;
 
+
+	private Rigidbody2D rb2d;
 	private int maxRadius = 0;
+	private int currentJam = 30;
 	private float lastTimeComboPressed;
 	private List<ComboKeys> keysPressed = new List<ComboKeys>();
 
 	new protected void Start() {
 		base.Start();
 		rb2d = GetComponent<Rigidbody2D>();
+		currentJam = maxJam/2;
 	}
 
 	void Update() {
@@ -36,23 +42,39 @@ public class Player : MusicalGameObject {
 				if(MusicManager.ins.IsBeat()) {
 					keysPressed.Add(key);
 				} else {
-					maxRadius = 0;
+					ResetCombo();
 				}
 				lastTimeComboPressed = Time.time;
 				boundaryCircle.DoRenderer();
 			}
 		}
 
+		jamSlider.value = Mathf.Lerp(jamSlider.value,(float)currentJam/(float)maxJam,5*Time.deltaTime);
+
 	}
 
-	void FixedUpdate() {
+	new protected void FixedUpdate() {
+		base.FixedUpdate();
+
 		Vector2 movement = new Vector2(Input.GetAxisRaw("Horizontal"),Input.GetAxisRaw("Vertical")).normalized;
 
 		if(movement.x != 0)
 			GetComponent<SpriteRenderer>().flipX = movement.x < 0;
-		GetComponent<Animator>().SetBool("moving",movement.magnitude > 0);
+		// GetComponent<Animator>().SetBool("moving",movement.magnitude > 0);
+		string currentAnim = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+		if(movement.magnitude > 0 && currentAnim != "Walk")
+			animator.Play("Walk",0,MusicManager.ins.GetNormalizedTimeSinceCurrentBeat());
+		else if(movement.magnitude == 0 && currentAnim != "Bop")
+			animator.Play("Bop",0,MusicManager.ins.GetNormalizedTimeSinceCurrentBeat());
 
 		rb2d.velocity = movement * speed;
+	}
+
+	void ResetCombo() {
+		maxRadius = 0;
+		foreach(AttackCombo ac in attacks) {
+			ac.consecutive = 0;
+		}
 	}
 
 	public override void OnEndBeat() {
@@ -65,7 +87,7 @@ public class Player : MusicalGameObject {
 				}
 			}
 		} else {
-			maxRadius = 0;
+			ResetCombo();
 		}
 		innerCircle.radius = 0;
 		keysPressed.Clear();
@@ -74,12 +96,22 @@ public class Player : MusicalGameObject {
 	}
 
 	void AttackWith(AttackCombo attack) {
-		keysPressed.Clear();
-		foreach(AttackCombo ac in attacks) {
-			ac.consecutive = 0;
+		int tempMax = maxRadius;
+		ResetCombo();
+		GameObject go = Instantiate(attack.prefab,transform.position,Quaternion.identity);
+		currentJam -= attack.jamCost;
+		if(currentJam <= 0) {
+			Die();
 		}
-		Debug.Log("attacking with " + attack.comboKeys.ToString());
-		GameObject go = Instantiate(playerAttackPrefab,transform.position,Quaternion.identity);
-		go.transform.localScale = new Vector3(maxRadius,maxRadius,1);
+		// go.transform.localScale = new Vector3(tempMax*2,tempMax*2,1);
+	}
+
+	void Die() {
+		transform.position = Vector2.up*10000;
+		MusicManager.ins.GetComponent<AudioSource>().pitch = 0.4f;
+	}
+
+	public void AddJam(int amount) {
+		currentJam = Mathf.Clamp(currentJam + amount,0,maxJam);
 	}
 }

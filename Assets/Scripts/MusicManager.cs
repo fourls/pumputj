@@ -31,6 +31,14 @@ public class MusicManager : MonoBehaviour {
 			OnEndBeat();
 		}
 		lastBeat = beatsPassed;
+
+		if(Input.GetKeyDown(KeyCode.F)) {
+			float oldBeat = (BPM*source.time)/60;
+			float beatDiff = Mathf.Floor(oldBeat) - oldBeat;
+
+			float recOffset = (60*beatDiff)/BPM;
+			Debug.Log("recommended offset is " + recOffset.ToString());
+		}
 	}
 
 	void OnEndBeat() {
@@ -45,5 +53,12 @@ public class MusicManager : MonoBehaviour {
 		float distanceThroughBeat = beatsPassed - Mathf.Floor(beatsPassed);
 
 		return distanceThroughBeat > 1 - threshold || distanceThroughBeat < threshold;
+	}
+
+	public float GetNormalizedTimeSinceCurrentBeat() {
+		float beatsPassed = (source.time+music.offset) / secsPerBeat;
+		float distanceThroughBeat = beatsPassed - Mathf.Floor(beatsPassed);
+
+		return distanceThroughBeat;
 	}
 }

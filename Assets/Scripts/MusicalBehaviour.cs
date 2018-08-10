@@ -5,6 +5,7 @@ using UnityEngine;
 public class MusicalBehaviour : MonoBehaviour {
 	[Header("Synchronising With Music")]
 	public Animator animator;
+	public string startingAnim;
 
 	protected void Start() {
 		MusicManager.ins.musicalBehaviours.Add(this);
@@ -14,8 +15,7 @@ public class MusicalBehaviour : MonoBehaviour {
 	public virtual void OnSongChange() {
 		if(animator != null) {
 			animator.speed = MusicManager.ins.BPM/60;
-			animator.enabled = false;
-			Invoke("StartAnimator",MusicManager.ins.music.offset);
+			animator.Play(startingAnim,0,MusicManager.ins.GetNormalizedTimeSinceCurrentBeat());
 		}
 	}
 
@@ -27,7 +27,4 @@ public class MusicalBehaviour : MonoBehaviour {
 		MusicManager.ins.musicalBehaviours.Remove(this);
 	}
 
-	void StartAnimator() {
-		animator.enabled = true;
-	}
 }

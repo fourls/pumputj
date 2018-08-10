@@ -7,5 +7,4 @@ public class Music : ScriptableObject {
 	public AudioClip clip;
 	public int bpm;
 	public float offset = 0f;
-	public float restartOffset = 0.01f;
 }

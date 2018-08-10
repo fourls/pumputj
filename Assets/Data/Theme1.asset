@@ -9,8 +9,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e615817e097344b4b8f02cae287d2ea3, type: 3}
-  m_Name: Test
+  m_Name: Theme1
   m_EditorClassIdentifier: 
-  clip: {fileID: 8300000, guid: eea3a1f500d984d0594a8430c962ec20, type: 3}
+  clip: {fileID: 8300000, guid: c7c20e28d3afe4e8eb27167f163fee84, type: 3}
   bpm: 120
   offset: 0

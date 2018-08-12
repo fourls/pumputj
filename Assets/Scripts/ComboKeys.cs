@@ -6,5 +6,9 @@ public enum ComboKeys {
 	I,
 	J,
 	K,
-	L
+	L,
+	W,
+	A,
+	S,
+	D
 }

@@ -7,7 +7,7 @@ public class MusicalBehaviour : MonoBehaviour {
 	public Animator animator;
 	public string startingAnim;
 
-	protected void Start() {
+	protected virtual void Start() {
 		MusicManager.ins.musicalBehaviours.Add(this);
 		OnSongChange();
 	}

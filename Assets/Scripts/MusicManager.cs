@@ -8,7 +8,8 @@ public class MusicManager : MonoBehaviour {
 	public Music music;
 	public float threshold = 0.1f;
 	public int BPM { get { return music.bpm; }}
-	public float secsPerBeat { get { return 60f / (float)BPM; }}
+	public float SecsPerBeat { get { return 60f / (float)BPM; }}
+	public int BeatsSinceStart { get { return Mathf.FloorToInt((source.time+music.offset) / SecsPerBeat); }}
 
 	private AudioSource source;
 	private int lastBeat = 0;
@@ -26,8 +27,8 @@ public class MusicManager : MonoBehaviour {
 
 	void Update() {
 
-		int beatsPassed = Mathf.FloorToInt(((source.time+music.offset) / secsPerBeat) - threshold);
-		if(beatsPassed > lastBeat || beatsPassed == 0) {
+		int beatsPassed = Mathf.FloorToInt(((source.time+music.offset) / SecsPerBeat) - threshold);
+		if(beatsPassed > lastBeat) {
 			OnEndBeat();
 		}
 		lastBeat = beatsPassed;
@@ -49,14 +50,14 @@ public class MusicManager : MonoBehaviour {
 
 	public bool IsBeat() {
 		// float closenessToBeat = (source.time+music.offset) % secsPerBeat;
-		float beatsPassed = (source.time+music.offset) / secsPerBeat;
+		float beatsPassed = (source.time+music.offset) / SecsPerBeat;
 		float distanceThroughBeat = beatsPassed - Mathf.Floor(beatsPassed);
 
 		return distanceThroughBeat > 1 - threshold || distanceThroughBeat < threshold;
 	}
 
 	public float GetNormalizedTimeSinceCurrentBeat() {
-		float beatsPassed = (source.time+music.offset) / secsPerBeat;
+		float beatsPassed = (source.time+music.offset) / SecsPerBeat;
 		float distanceThroughBeat = beatsPassed - Mathf.Floor(beatsPassed);
 
 		return distanceThroughBeat;

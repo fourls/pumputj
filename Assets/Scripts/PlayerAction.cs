@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class AttackCombo {
+public class PlayerAction : ObjectAction {
 	public List<ComboKeys> comboKeys;
-	public GameObject prefab;
 	public int jamCost = 10;
+	[HideInInspector]
 	public int consecutive = 0;
 
 	public bool HandleKey(ComboKeys key) {

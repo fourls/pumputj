@@ -120,6 +120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.6
+  damage: 5
+  knockback: 600
 --- !u!198 &198242906391511640
 ParticleSystem:
   m_ObjectHideFlags: 1

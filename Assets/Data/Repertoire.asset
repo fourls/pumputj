@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48436fa676afe764ebf29397f3aa6c57, type: 3}
+  m_Name: Repertoire
+  m_EditorClassIdentifier: 
+  actions:
+  - affectedLocations: []
+    relocation: {x: 0, y: 1}
+    prefab: {fileID: 0}
+    comboKeys: 04000000
+    jamCost: 0
+    consecutive: 0
+  - affectedLocations: []
+    relocation: {x: 0, y: -1}
+    prefab: {fileID: 0}
+    comboKeys: 06000000
+    jamCost: 0
+    consecutive: 0
+  - affectedLocations: []
+    relocation: {x: -1, y: 0}
+    prefab: {fileID: 0}
+    comboKeys: 05000000
+    jamCost: 0
+    consecutive: 0
+  - affectedLocations: []
+    relocation: {x: 1, y: 0}
+    prefab: {fileID: 0}
+    comboKeys: 07000000
+    jamCost: 0
+    consecutive: 0
+  - affectedLocations:
+    - {x: -1, y: 0}
+    - {x: 1, y: 0}
+    - {x: 0, y: 1}
+    - {x: 0, y: -1}
+    relocation: {x: 0, y: 0}
+    prefab: {fileID: 1254702874169242, guid: 244193e1a488d4233b6447ec007c88b4, type: 2}
+    comboKeys: 00000000
+    jamCost: 10
+    consecutive: 0

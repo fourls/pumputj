@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 4485770871371760}
   - component: {fileID: 198242906391511640}
   - component: {fileID: 199650192141906388}
-  - component: {fileID: 58224155196078716}
   m_Layer: 0
   m_Name: Particle System
   m_TagString: Untagged
@@ -39,6 +38,7 @@ GameObject:
   - component: {fileID: 4728967988179568}
   - component: {fileID: 114924811618773262}
   - component: {fileID: 50927830239185470}
+  - component: {fileID: 61560345305802580}
   m_Layer: 0
   m_Name: Taser
   m_TagString: Untagged
@@ -93,21 +93,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &58224155196078716
-CircleCollider2D:
+--- !u!61 &61560345305802580
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1126701431458408}
+  m_GameObject: {fileID: 1254702874169242}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 3
+  m_Size: {x: 0.8, y: 0.8}
+  m_EdgeRadius: 0
 --- !u!114 &114924811618773262
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.2
+  damage: 10
 --- !u!198 &198242906391511640
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -127,7 +138,7 @@ ParticleSystem:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1126701431458408}
   serializedVersion: 5
-  lengthInSec: 0.3
+  lengthInSec: 0.5
   simulationSpeed: 1
   stopAction: 0
   looping: 0
@@ -199,7 +210,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 0.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -252,7 +263,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 15
+      scalar: 3
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -306,7 +317,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.4233268, g: 0.5860078, b: 0.5943396, a: 1}
+      maxColor: {r: 0, g: 0.93181825, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -368,7 +379,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.6
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -747,11 +758,11 @@ ParticleSystem:
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
-    radiusThickness: 1
+    radiusThickness: 0
     donutRadius: 0.2
     m_Position: {x: 0, y: 0, z: 0}
     m_Rotation: {x: 0, y: 0, z: 0}
-    m_Scale: {x: 1, y: 1, z: 1}
+    m_Scale: {x: 0.4, y: 0.4, z: 0}
     placementMode: 0
     m_MeshMaterialIndex: 0
     m_MeshNormalOffset: 0
@@ -774,7 +785,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.2
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -2108,7 +2119,7 @@ ParticleSystem:
     speedModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.8
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -2658,7 +2669,7 @@ ParticleSystem:
     strength:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 3
+      scalar: 1
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3037,7 +3048,7 @@ ParticleSystem:
     positionAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.2
+      scalar: 0.3
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -3090,7 +3101,7 @@ ParticleSystem:
     rotationAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3143,7 +3154,7 @@ ParticleSystem:
     sizeAmount:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.3
+      scalar: 1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
